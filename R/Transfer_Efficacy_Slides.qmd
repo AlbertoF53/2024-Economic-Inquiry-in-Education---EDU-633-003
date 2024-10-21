@@ -107,7 +107,6 @@ The main premise of goal orientation is that individuals who pursue clear and di
 -   Clear and difficult goals are more likely to be attained than those vaguely stated
 -   Goals oriented to learning or mastery are more likely to be attained
 
-
 ## Transfer Efficacy Model {background-image="background.jpg"}
 
 ![](images/TEM_model.png)
@@ -201,3 +200,27 @@ The U.S. Department of Education published a list of community colleges and univ
 :::::
 
 # [*Many thanks!!!*]{style="color:yellow;"} {background-image="villarica.jpeg"}
+
+## References {background-image="background.jpg"}
+
+Bandura, A (1988). Organizational Application of Social Cognitive Theory. Australian Journal of Management, 13(2): pp. 275 - 302. 
+
+Bandura, A. (1994). Self-efficacy. In VS Ramachandran. Encyclopedia of Human Behavior, 4, 71-81.
+
+Buenaflor, S. H. & Cabrera, A. F. (2023). Transfer efficacy and goal orientation among potential transfer students: An exploratory study.  Paper presented before the annual meeting of the National Institute for the Study of Transfer Students (NISTS). Portland, Oregon.
+
+## References (continues) {background-image="background.jpg"}
+
+Buenaflor, S.H. (2021). Transfer student self-efficacy: A success-oriented narrative of the transfer student experience. Community College Journal of Research and Practice, 1-16. <https://doi.org/10.1080/10668926.2021.1967226>.
+
+Locke, E. A. & Latham, G. P. (1990). A theory of goal setting and task performance. Prentice Hall.References.
+
+National Student Clearinghouse (March 25, 2024). Community College Enrollment & Other Mobility Trends in Fall 2023.
+
+## References (continues) {background-image="background.jpg"}
+
+National Student Clearinghouse (March 9, 2023). Transfers from Community Colleges to Four-Year Colleges Drop Nearly 8% from Fall 2021 to Fall 2022.
+
+Tourangeau, R., Rips, L. J. & Rainski (2000).The psychology of survey response, Cambridge University Press.
+
+Velasco, et al. (2024). Tracking transfer. College Research Center. Teachers College. Columbia University.
