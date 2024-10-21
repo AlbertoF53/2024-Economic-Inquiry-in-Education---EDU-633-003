@@ -1,0 +1,105 @@
+---
+title: "Pathways to college"
+subtitle: "Temuco Conference"
+author: "Alberto F Cabrera"
+date: 2023-10-16
+format: 
+  html:
+    code-link: true
+    code-fold: true
+    self-contained: true
+    embed-resources: true
+    toc: true
+    theme: Zephyr
+    number-sections: false
+knirt:
+  opts_chunk: 
+    warning: false
+    editor_options: 
+    chunk_output_type: inline
+editor: visual
+---
+
+## Loading libraries
+
+```{r}
+#| label: loading_libraries
+#| warning: false
+#| echo: false
+
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(gtsummary)
+library(gtools)
+library(dplyr)
+library(munsell)
+library(ggthemes)
+
+
+
+```
+
+National Center for Education Statistics. Digest of Education Statistic's [table 303.10](https://nces.ed.gov/programs/digest/d22/tables/dt22_303.10.asp) Total fall enrollment in degree-granting post-secondary institutions, by attendance status, sex of student, and control of institution: Selected years, 1947 through 2031 (Estimated).
+
+```{r}
+#| label: retrieving_table_303_1
+#| warning: false
+#| echo: true
+
+library(tidyverse)
+library(haven)
+library(janitor)
+
+Enrollment_PSE_1947_2023 <- read_dta("Enrollment_PSE_1947-2023.dta") %>% 
+  clean_names()
+
+```
+
+Enrollment in postsecondary education 1947-2023
+
+```{r}
+#| label: postsecondary_enrollment
+#| warning: false
+#| echo: true
+
+Enrollment_PSE_1947_2023  %>% 
+  filter(as.numeric(enr_th) <= "2010") %>% 
+  ggplot(aes(x = year, y = enr_th)) +
+  geom_line() +
+  geom_point() +
+  scale_x_continuous(breaks = seq(1973, 2023, 5)) +
+  scale_y_continuous(breaks = seq(10000, 21000, 1000)) +
+  labs(title = "Matrícula en educación superior (en miles)",
+       subtitle = "1973 - 2023",
+       caption = "Basado en la tabla 303.10 Compendio de Estadísticas Educativas 16 de octubre de 2023",
+       y = element_blank(), 
+       x = element_blank() ) +
+  geom_text(x = 2017,
+            y = 18500,
+            label = "COVID-19",
+            color = "red",
+            size = 3.1,
+            show.legend = FALSE) +
+  geom_vline(xintercept = 2020, linetype = "dashed",
+             color = "red", size = 1) +
+  theme(
+    plot.title = element_text(size = 20, hjust = 0.5),
+    plot.subtitle = element_text(size = 15, hjust = 0.5),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.minor.x = element_blank()) +
+  theme_classic()
+  
+
+
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).

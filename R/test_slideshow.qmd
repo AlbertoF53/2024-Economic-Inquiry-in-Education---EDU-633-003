@@ -1,0 +1,507 @@
+---
+title: "CHCI Alumi Survey Update Insights"
+author: "AG Associates"
+date: 2024-03-20
+format:
+  revealjs:
+    footer: "Tyding up for improved insights"
+    logo: assets/hispanic_caucus.png
+    incremental: true
+    transition: slide
+    title-slide-attributes: 
+      data-background-image: villarica.jpeg
+execute: 
+  echo: false
+  warning: false
+  message: false
+editor_options: 
+  chunk_output_type: console
+---
+
+## Introduction {background-image="background.jpg"}
+
+This report summarizes AG Associates' progress in cleaning the 2023 CHCI Alumni survey (2023 CHCI). 
+
+It is organized into the following sections:
+
+1.  Codebook
+2.  Survey response rate
+3.  Tidying up survey items
+4.  Program participation & demographics
+
+## [Codebook]{style="color:yellow;"} {background-image="ocean.jpeg"}
+
+[We already have a draft of an excel file meant to guide CHCI staff as to the organization of the database. This [codebook](https://docs.google.com/spreadsheets/d/1gx3k70ihrDAowFdmgp93C9sXhO5dLo9N3uZMksL6Wmc/edit?usp=sharing) constitutes a master dictionary easing access to the 75 items or data elements underscoring the alumni survey.]{style="color:white;"}
+
+## Codebook components {background-image="background.jpg"}
+
+The cookbook is aligned with the 5 sections of the survey. Those sections are:
+
+1.  Demographics (21 items)
+2.  Program participation (8 items)
+3.  Education & career trajectory ( 20 items)
+4.  Self-Actualization (10 items)
+5.  Program reflection and connection (16 items)
+
+## Response rate {background-image="background.jpg"}
+
+```{r sample_size}
+#| echo: false
+#| warning: false
+
+library(tidyverse)
+
+CHCI_Alumni_Cleaned_6 <- readRDS("~/Documents/2024 CHCI Alumni survey/CHCI Alumni Survey/data/CHCI_Alumni_Cleaned_6.rds")
+
+
+```
+
+`r nrow(CHCI_Alumni_Cleaned_6)` CHCI alumni answered the survey. The survey administration yielded an effective sample of up to 599 alumni.
+
+```{r response_rate}
+#| tbl-cap: CHCI Survey Completion 
+#| echo: false
+#| warning: false
+
+library(tidyverse)
+library(janitor)
+library(readxl)
+library(gt)
+library(readr)
+library(foreign)
+library(here)
+library(fs)
+
+CHCI_Alumni_Cleaned_6 <- readRDS("~/Documents/2024 CHCI Alumni survey/CHCI Alumni Survey/data/CHCI_Alumni_Cleaned_6.rds")
+
+CHCI_Alumni_Cleaned_6  |> 
+  group_by(percent_completion) |> 
+  summarise(N = n()) |>  
+  mutate(freq = N/sum(N),
+         pct = round((freq*100),1)) |>
+  select(-freq) |> 
+  gt() |> 
+  cols_width(
+    percent_completion ~ px(100)
+  ) |> 
+  cols_align(columns = 2:3,
+             align = 'center') |> 
+  cols_label(percent_completion	~ "Completion Ranges",
+             pct ~ "%") |> 
+  tab_header(title = "Survey Completion Rates",
+             subtitle = "2023 CHCI Alumni Survey") |> 
+  opt_stylize(style = 1, color = 'blue' )
+```
+
+## Tidying up survey items {background-image="background.jpg"}
+
+We are in the process of cleaning the 75 survey items. The excel file created by Qualtrics exhibits three main problems that make it difficult to analyze the data.
+
+1.  Unordered Likert scales
+
+2.  Extraneous characters
+
+3.  Tangled responses
+
+## Unordered Likert scales {background-image="background.jpg"}
+
+Qualtrics’ coding for Likert scales does not follow a logical order.
+
+```{r likert_alphabetical}
+#| echo: false
+#| warning: false
+
+CHCI_Alumni_Cleaned <- readRDS("~/Documents/2024 CHCI Alumni survey/CHCI Alumni Survey/data/CHCI_Alumni_Cleaned.rds")
+
+
+CHCI_Alumni_Cleaned |> 
+  filter(!is.na(q43_connected)) |> 
+  count(q43_connected)
+
+```
+
+## Extraneous characters {background-image="background.jpg"}
+
+Thirty-five percent of the items had responses that needed to be coded as missing due to extraneous characters embedded into each of them (e.g., **\*** , **.** , **\_** , **-, ?**).
+
+## Tangled responses {background-image="background.jpg"}
+
+The reliance of Qualtrics on a single item to capture multiple experiences resulted in tangled responses.
+
+```{r tangled_responses}
+#| echo: false
+#| warning: false
+
+CHCI_Alumni_Cleaned <- readRDS("~/Documents/2024 CHCI Alumni survey/CHCI Alumni Survey/data/CHCI_Alumni_Cleaned.rds")
+
+CHCI_Alumni_Cleaned |> 
+  count(q20_chci_prog) |> 
+  print(n = Inf)
+```
+
+## Program participation {background-image="background.jpg"}
+
+```{r untangling_cip_programs}
+#| echo: false
+#| warning: false
+
+library(readxl)
+library(gt)
+library(tidyverse)
+
+CHCI_programs <- read_excel("~/Documents/2024 CHCI Alumni survey/CHCI Alumni Survey/data/CHCI_programs_new_revised.xlsx")
+
+
+CHCI_programs |>
+  gt() |>
+  cols_label(prog ~ "Program") |>
+  cols_label((pct ~ "%")) |>
+  cols_width(prog ~ pct(25)) |>
+  cols_align(2:6,
+             align = 'center') |>
+  tab_header(title = "CHCI program participation",
+             subtitle = "2023 CHCI Alumni Survey") |>
+  tab_spanner(label = "Participation year",
+              columns = min:median) |>
+  opt_stylize(style = 1, color = 'blue' ) |>
+  tab_footnote(
+    footnote = "A single item was used to capture participation year at either PPF or G/P fellowship.",
+    locations = cells_body(
+      columns = prog,
+      rows = prog == "Graduate/Postgraduate Fellowship"
+    )
+  ) |>
+  opt_footnote_marks(marks = c("*","+"))
+
+
+```
+
+## Untangling program participation {background-image="background.jpg"}
+
+```{r program_intensity}
+#| echo: false
+#| warning: false
+#| fig-height: 5
+
+
+CHCI_Alumni_Cleaned_6 <- readRDS("~/Documents/2024 CHCI Alumni survey/CHCI Alumni Survey/data/CHCI_Alumni_Cleaned_6.rds")
+
+coding_programs <-  CHCI_Alumni_Cleaned_6 |> 
+  separate_longer_delim(chci_programs,
+                        delim = ", ") |> 
+  select(id, chci_programs)
+
+chci_programs <- coding_programs |> 
+  group_by(chci_programs) |> 
+  summarise(N = n()) |>  
+  mutate(freq = N/sum(N),
+         pct = round((freq*100),1)) 
+
+
+chci_programs <- chci_programs |> 
+  na.omit() |> 
+  mutate(chci_programs_new = case_when(chci_programs == "CIP" ~ "Congressional Internship Program",
+                                       chci_programs == "HOGAR" ~ "HOGAR Fellowship",
+                                       chci_programs == "POSTGRAD" ~ "Graduate/Postgraduate Fellowship",
+                                       chci_programs == "LHSA" ~ "Latino Hill Staff",
+                                       chci_programs == "NextGen" ~ "NextGen Latino Leadership",
+                                       chci_programs == "PPFP" ~ "Public Policy Fellowship",
+                                       chci_programs == "ScholarIntern" ~ "Scholar-Intern Programs"),
+         chci_programs_new = fct_reorder(chci_programs_new, N),
+         is.cip = case_when(chci_programs_new == "Congressional Internship Program" ~ "Y",
+                            .default = "N"))
+
+
+title_color <- "The **<span style='color:#6cabdd;'>Congressional Internship Program</span>** ranks as one of the most prominent programs in which CHCI alumni<br>partipate"
+
+chci_programs |> 
+  ggplot(aes(x = N,
+             y = chci_programs_new,
+             fill = is.cip,
+             color = is.cip)) +
+  geom_col(width = 0.5,
+           color = 'transparent') +
+  geom_text(
+    aes(
+      x = 0,
+      y = chci_programs_new,
+      label = chci_programs_new),
+    hjust = 0,
+    vjust = -2.2,
+    size = 4,
+    fontface = 'bold',
+    base_family = "Source Sans Pro") +
+  geom_text(aes(label = N),
+            hjust = 1.25,
+            color = "#da291c") +
+  theme_void(base_size = 16,
+                base_family = "Source Sans Pro") +
+  labs(title = title_color) +
+  theme(legend.position = 'none',
+        plot.title.position = 'plot',
+        plot.title = ggtext::element_markdown(
+          size = 15.9,
+          linewidth = 2,
+          margin = margin(t = 1, b = 2.0, unit = 'mm') 
+        ),
+        plot.caption = element_text(size = 10, color = '#131333')) +
+  scale_fill_manual(values = c("Y" = "#6cabdd", "N" = 'grey70' )) +
+  scale_color_manual(values = c("Y" = "#6cabdd", "N" = 'grey10' )) +
+  scale_x_continuous(expand = expansion(add = 0))
+
+```
+
+## Demographics {background-image="background.jpg"}
+
+This section reports our progress in documenting survey respondents' demographic characteristics, including gender, veteran status, race, ethnic identity, and Hispanic or Latinx heritage. Additionally, it provides insights into income and education levels.
+
+## Gender identification {background-image="background.jpg"}
+
+The majority of CHCI graduates are female (65 percent). Most reported not belonging to the LBGTQ1A + community. Six percent declined disclosing participation in the LBGTQ1A community.
+
+::::: columns
+::: {.column width="50%"}
+```{r gender}
+#| tbl-caption: Gender
+#| echo: false
+#| warning: false
+
+CHCI_Alumni_Cleaned_6 <- readRDS("~/Documents/2024 CHCI Alumni survey/CHCI Alumni Survey/data/CHCI_Alumni_Cleaned_6.rds")
+
+CHCI_Alumni_Cleaned_6  |> 
+  filter(!is.na(q11_gender)) |> 
+  group_by(q11_gender) |> 
+  summarise(N = n()) |>  
+  mutate(freq = N/sum(N),
+         pct = round((freq*100),1)) |>
+  select(-freq) |> 
+  na.omit() |> 
+  arrange(desc(pct)) |> 
+  gt() |> 
+  cols_align(2:3,
+             align = 'center') |> 
+  cols_label(q11_gender ~ " ",
+             pct ~ "%") |> 
+  tab_header(title = "Gender identification") |> 
+  opt_stylize(style = 1, color = 'blue' )
+
+```
+:::
+
+::: {.column width="50%"}
+```{r LBTQIA}
+#| tbl-caption: LGBTQIA community
+#| echo: false
+#| warning: false
+
+CHCI_Alumni_Cleaned_6 <- readRDS("~/Documents/2024 CHCI Alumni survey/CHCI Alumni Survey/data/CHCI_Alumni_Cleaned_6.rds")
+
+CHCI_Alumni_Cleaned_6  |> 
+  filter(!is.na(q12_lgbtqia)) |> 
+  group_by(q12_lgbtqia) |> 
+  summarise(N = n()) |>  
+  mutate(freq = N/sum(N),
+         pct = round((freq*100),1)) |>
+  select(-freq) |> 
+  na.omit() |> 
+  arrange(desc(pct)) |> 
+  gt() |> 
+  cols_align(2:3,
+             align = 'center') |> 
+  cols_label(q12_lgbtqia ~ " ",
+             pct ~ "%") |> 
+  tab_header(title = "LGBTQIA + community") |> 
+  opt_stylize(style = 1, color = 'blue' )
+
+```
+:::
+:::::
+
+## Education & income {background-image="background.jpg"}
+
+CHCI alumni are highly educated, and wealthy.
+
+::::: columns
+::: {.column width="50%"}
+```{r highest_education}
+#| echo: false
+#| warning: false
+
+CHCI_Alumni_Cleaned_6 <- readRDS("~/Documents/2024 CHCI Alumni survey/CHCI Alumni Survey/data/CHCI_Alumni_Cleaned_6.rds")
+
+CHCI_Alumni_Cleaned_6  |> 
+  filter(!is.na(q28_education)) |> 
+  group_by(q28_education) |> 
+  summarise(N = n()) |>  
+  mutate(freq = N/sum(N),
+         pct = round((freq*100),1)) |>
+  select(-freq) |> 
+  gt() |> 
+  cols_label(q28_education ~ " ",
+             pct ~ "%") |> 
+  cols_width(
+    q28_education ~ px(200)) |> 
+  cols_align(
+    columns = 2:3,
+    align = 'center'
+  ) |> 
+  tab_header(title = "Education") |> 
+  opt_stylize(style = 1, color = 'blue' )
+ 
+
+```
+:::
+
+::: {.column width="50%"}
+```{r income}
+#| echo: false
+#| warning: false
+
+CHCI_Alumni_Cleaned_6 <- readRDS("~/Documents/2024 CHCI Alumni survey/CHCI Alumni Survey/data/CHCI_Alumni_Cleaned_6.rds")
+
+
+CHCI_Alumni_Cleaned_6  |> 
+  filter(!is.na(q19_income)) |> 
+  group_by(q19_income) |> 
+  summarise(N = n()) |>  
+  mutate(freq = N/sum(N),
+         pct = round((freq*100),1)) |>
+  select(-freq) |> 
+  gt() |> 
+  cols_label(q19_income ~ " ",
+             pct ~ "%") |> 
+  cols_align(columns = 2:3,
+             align = 'center') |> 
+  tab_header(title = "Household income") |> 
+  opt_stylize(style = 1, color = 'blue' )
+ 
+
+
+
+```
+:::
+:::::
+
+## Alumni's Latino heritage {background-image="background.jpg"}
+
+CHCI alumni is fairly representative of the US population ([Pew Research Center, August 16, 2023](https://www.pewresearch.org/short-reads/2023/08/16/11-facts-about-hispanic-origin-groups-in-the-us/)).
+
+```{r hispanic_representativeness_survey}
+#| echo: false
+#| warning: false
+
+library(readxl)
+library(gt)
+
+latin_amer_region <- read_excel("~/Documents/2024 CHCI Alumni survey/CHCI Alumni Survey/data/latin_amer_region.xlsx")
+
+latin_amer_region |>
+  gt() |>
+  cols_label(latin_american	~ " ") |>
+  cols_label(chci_survey = html("CHCI<br>Survey")) |>
+  cols_label(us_census = html("US<br>Census")) |>
+  cols_label(civically_engaged = html("Civically<br>Engaged")) |>
+  cols_width(latin_american ~ px(100)) |>
+  cols_align(2:4,
+             align = 'center') |>
+  tab_header(title = "Latino populations by region") |>
+  tab_spanner(
+    label = "Relevant comparisons",
+    columns = c("us_census", "civically_engaged")) |>
+  opt_stylize(style = 1, color = 'blue' ) |>
+  tab_footnote(
+    footnote = "2019 National Sample of Civically Engaged Latinos (Guzman & Cabrera, 2021).",
+    locations = cells_column_labels(columns = civically_engaged)
+  )
+
+```
+
+## Race & ethnicity {background-image="background.jpg"}
+
+::::: columns
+::: {.column width="50%"}
+```{r race}
+#| echo: false
+#| warning: false
+
+CHCI_Alumni_Cleaned_6 <- readRDS("~/Documents/2024 CHCI Alumni survey/CHCI Alumni Survey/data/CHCI_Alumni_Cleaned_6.rds")
+
+CHCI_Alumni_Cleaned_6  |> 
+  filter(!is.na(q14_race)) |> 
+  group_by(q14_race) |> 
+  summarise(N = n()) |>  
+  mutate(freq = N/sum(N),
+         pct = round((freq*100),1)) |>
+  select(-freq) |> 
+  na.omit() |> 
+  arrange(desc(pct)) |> 
+  gt() |> 
+  cols_label(q14_race ~ " ",
+             pct ~ "%") |> 
+  cols_align(columns = 2:3,
+             align = 'center') |> 
+  tab_header(title = "Race") |> 
+  opt_stylize(style = 1, color = 'blue' )
+
+```
+:::
+
+::: {.column width="50%"}
+```{r ethnic_identity}
+#| echo: false
+#| warning: false
+
+CHCI_Alumni_Cleaned_6 <- readRDS("~/Documents/2024 CHCI Alumni survey/CHCI Alumni Survey/data/CHCI_Alumni_Cleaned_6.rds")
+
+CHCI_Alumni_Cleaned_6  |> 
+  filter(!is.na(q15_ethnicity)) |> 
+  group_by(q15_ethnicity) |> 
+  summarise(N = n()) |>  
+  mutate(freq = N/sum(N),
+         pct = round((freq*100),1)) |>
+  select(-freq) |> 
+  na.omit() |> 
+  arrange(desc(pct)) |> 
+  gt() |> 
+  cols_label(q15_ethnicity ~ " ",
+             pct ~ "%") |> 
+  cols_align(columns = 2:3,
+             align = 'center') |> 
+  tab_header(title = "Ethnic identity") |> 
+  opt_stylize(style = 1, color = 'blue' )
+
+
+```
+:::
+:::::
+
+## Heritage {background-image="background.jpg"}
+
+```{r hispanic_latinx_heritage}
+#| echo: false
+#| warning: false
+
+CHCI_Alumni_Cleaned_6 <- readRDS("~/Documents/2024 CHCI Alumni survey/CHCI Alumni Survey/data/CHCI_Alumni_Cleaned_6.rds")
+
+CHCI_Alumni_Cleaned_6  |> 
+  filter(!is.na(q16_hispanic_herit)) |> 
+  group_by(q16_hispanic_herit) |> 
+  summarise(N = n()) |>  
+  mutate(freq = N/sum(N),
+         pct = round((freq*100),1)) |>
+  select(-freq) |> 
+  na.omit() |> 
+  arrange(desc(pct)) |> 
+  gt() |> 
+  cols_label(q16_hispanic_herit ~ " ",
+             pct ~ "%") |> 
+  cols_align(columns = 2:3,
+             align = 'center') |> 
+  tab_header(title = "Hispanic/Latinx heritage") |> 
+  opt_stylize(style = 1, color = 'blue' )
+
+
+
+```
+
+# [Questions?]{style="color:white;"} {background-image="jaleo.jpeg"}

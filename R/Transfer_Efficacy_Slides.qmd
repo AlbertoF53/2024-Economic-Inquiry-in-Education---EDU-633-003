@@ -1,0 +1,203 @@
+---
+title: "Transfer Efficacy & Goal Orientation"
+subtitle: "Economic Inquiry in Education (EDU-633-001)"
+author: 
+  name: "Dr. Alberto F. Cabrera"
+  affiliation: "American University & University of Maryland"
+  email: cabrera@umd.edu
+date: 2024-11-11
+format:
+  revealjs:
+    code-link: false
+    chalkboard: true
+    multiplex: true
+    incremental: true
+    transition: slide
+    title-slide-attributes: 
+      data-background-image: abstract.jpg
+execute: 
+  echo: false
+  warning: false
+  message: false
+editor_options: 
+  chunk_output_type: console
+---
+
+## Agenda {background-image="background.jpg"}
+
+1.  Contextual overview
+
+2.  The problem
+
+3.  Conceptual models
+
+4.  Research methods
+
+5.  Conclusions
+
+6.  Applications (So what?)
+
+## US population & higher education {background-image="background.jpg"}
+
+::::: columns
+::: {.column width="50%"}
+![](images/us_map.png){fig-align="left"}
+:::
+
+::: {.column width="50%"}
+-   Population: 341,814,420
+
+-   Around 19.2 million students (undergraduate and postgraduate) are enrolled in 3,896 higher education institutions (2-year and 4-year) (NCES projection)
+
+-   Only 50(1.9%) universities have 35 thousand or more students enrolled
+:::
+:::::
+
+## American Postsecondary Degrees {background-image="background.jpg"}
+
+::::: columns
+::: {.column width="45%"}
+![](images/degrees_pyramid.png){fig-align="left"}
+:::
+
+::: {.column width="50%"}
+![](images/degrees.jpg){fig-align="right"}
+:::
+:::::
+
+## COVID-19 exarcebated enr. decline {background-image="background.jpg"}
+
+![](images/problem_picture-02.jpg)
+
+## Research questions {background-image="background.jpg"}
+
+1.  Is transfer efficacy among community college students composed of four unique, but interrelated sub-constructs(namely, mastery experiences, social persuasion, vicarious experiences, & reduction of stress).
+
+2.  What constitutes goal orientation towards transferring among community college students?
+
+3.  What is the impact of each component of transfer self-efficacy on goal orientation among community college students?
+
+## Guiding conceptual models {background-image="background.jpg"}
+
+1.  Social Cognitive Theory (Bandura, 1989), and Self-Efficacy Theory (Bandura, 1994)
+
+2.  Goal Orientation Theory (Locke & Latham,2002)
+
+3.  Transfer Efficacy Model (TEM) (Buenaflor, 2021)
+
+## Social Cognitive Theory (SCT) {background-image="background.jpg"}
+
+SCT postulates that contextual influences can affect a person's belief on her ability to engage in behaviors that lead to specific outcomes. Bandura postulates there are four contextual influences:
+
+1.  Vicarious experiences (e.g., seeing other succeeding in the task)
+
+2.  Social persuasion (e.g., receiving positive feedback from people whose opinion one values)
+
+3.  Reduction of stress (e.g., eliminating barriers to succeed in the task)
+
+4.  Mastery experiences (e.g., becoming an expert )
+
+## Goal orientation {background-image="background.jpg"}
+
+Goal orientation is a social-cognitive theory that examines the relationship between people and their goals (Locke & Latham, 1990)
+
+The main premise of goal orientation is that individuals who pursue clear and difficult goals tend to perform better.
+
+-   The more specific a goal is, the more likely an individual is to achieve it
+-   Clear and difficult goals are more likely to be attained than those vaguely stated
+-   Goals oriented to learning or mastery are more likely to be attained
+
+
+## Transfer Efficacy Model {background-image="background.jpg"}
+
+![](images/TEM_model.png)
+
+## Making TEM testable {background-image="background.jpg"}
+
+![](images/theory_testing.jpg)
+
+## Methods {background-image="background.jpg"}
+
+Data collection consisted of two phases
+
+Phase 1: Dealt with survey development aimed at capturing content valid items for the the fire core component of the TEM model
+
+-   Focus groups with three transfer students assessed the content validity of the items based on the psychology of survey response theory (Tourangeau et al.,2000)
+
+-   Accordingly participants were asked to examine each item, recall critical experiences, and provide examples
+
+-   A short definition of the 5 constructs was made available to assist recalling process
+
+## Phase 2: Survey administration {background-image="background.jpg"}
+
+Survey collection took place during spring 2022 using Qualtrics
+
+Relied on on professional listservs to circulate the survey (e.g., NACADA) as well as Phi Theta Kappa to administer the survey among their partner organizations.
+
+Students were entered into a raffle for an Apple iPad as an incentive
+
+1,810 respondents completed the survey
+
+## Who answered the survey? {background-image="background.jpg"}
+
+![](images/who_answered.jpg)
+
+## Exploratory factor analysis {background-image="background.jpg"}
+
+**Sources of self-efficacy**: Instead of being grouped into four factors (as hypothesized), the self-efficacy items were grouped into five factors: Altogether, they explained 53% of the variance in the correlation matrix
+
+**Goal orientation**: Four indicators were grouped into a single factor. This factor accounts for almost 60% of the variance in the correlation. An indicator was removed.
+
+## Confirmatory factor analysis {background-image="background.jpg"}
+
+![](images/CFA_results-01.jpg)
+
+## Main research questions {background-image="background.jpg"}
+
+What is the impact of transfer self-efficacy on goal orientation among community college students?
+
+Does the impact vary by transfer self-efficacy component?
+
+## Impact of self-efficacy on goal orient. {background-image="background.jpg"}
+
+![](images/impact_self_efficacy-02.jpg)
+
+## Conclusions {background-image="background.jpg"}
+
+-   Goal orientation towards transfer rests on having an academic plan, being proactive in securing academic skills, having decided on the major to pursue, and seen oneself attending college.
+
+-   Goal orientation is impacted by empowering experiences at the community college (e.g., having friends who transferred), being exposed to personnel who validate one's ability to transfer, as well as by clear institutional agreements facilitating an understanding of transfer policies, and how to meet them.
+
+# [Questions?]{style="color:white;"} {background-image="ocean.jpeg"}
+
+## In class exercise: What intervention strategies do you suggest? {background-image="background.jpg"}
+
+-   From the perspective of the president of a community college who is committed at increasing the proportion of her students to eventually transfer to a four-year institution.
+
+-   From the perspective of the president of a university who is committed at increasing the enrollment of community college graduates, and their success at her institution.
+
+## State level developments {background-image="background.jpg"}
+
+::::: columns
+::: {.column width="45%"}
+On October 31, 2023, the California legislature enacted a new law to facilitate the process of transferring community college students to UCLA and other universities in the California higher education system.
+:::
+
+::: {.column width="55%"}
+![](images/state_level_develop.jpg){fig-align="right"}
+:::
+:::::
+
+## Federal level developments {background-image="background.jpg"}
+
+::::: columns
+::: {.column width="40%"}
+The U.S. Department of Education published a list of community colleges and universities that stand out in facilitating transfer and success in college for community college graduates.
+:::
+
+::: {.column width="60%"}
+![](images/fed_develop.png){fig-align="right"}
+:::
+:::::
+
+# [*Many thanks!!!*]{style="color:yellow;"} {background-image="villarica.jpeg"}
