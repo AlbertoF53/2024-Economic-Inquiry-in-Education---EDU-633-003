@@ -65,7 +65,7 @@ editor_options:
 :::
 :::::
 
-## [COVID-19]{style="color:#E69F00;"} increased enr. decline {background-image="background.jpg"}
+## [COVID-19]{style="color:#E69F00;"} worsened enr. decline {background-image="background.jpg"}
 
 ![](images/problem_picture-02.jpg)
 
