@@ -29,7 +29,6 @@ Relying on [Digest of Education Statistics](https://nces.ed.gov/programs/digest/
 #|echo: true
 #|warning: false
 
-
 library(tidyverse)
 library(gt)
 library(gtExtras)
