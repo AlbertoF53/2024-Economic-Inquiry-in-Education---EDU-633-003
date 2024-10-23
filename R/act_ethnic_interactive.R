@@ -13,7 +13,7 @@ library(ggiraph)
 
 
 library(readxl)
-act_populations_english <- read_excel("act_populations_english.xlsx")
+act_populations_english <- read_excel("~/Documents/2024 Economic Inquiry in Education - EDU-633-003/data/act_populations_english.xlsx")
 View(act_populations_english)
 
 act_disparities <-  act_populations_english %>% 
@@ -48,7 +48,7 @@ act_inter <- act_disparities %>%
   scale_color_brewer(palette = "Dark2") +
   theme_minimal(
     base_size = 18,
-    base_family = "Source Sans Pro 3") +
+    base_family = "Source Sans Pro") +
   theme(
     legend.title = element_blank(),
     legend.text = element_text(size = 10),
@@ -91,7 +91,7 @@ girafe(
 # Importing excel files ----------------------------------------------------
 
 library(readxl)
-act_poblaciones_espanol <- read_excel("act_poblaciones_espanol.xlsx")
+act_poblaciones_espanol <- read_excel("~/Documents/2024 Economic Inquiry in Education - EDU-633-003/data/act_poblaciones_espanol.xlsx")
 View(act_poblaciones_espanol)
 
 
@@ -127,7 +127,7 @@ act_pob <- act_poblacion %>%
   scale_color_brewer(palette = "Dark2") +
   theme_minimal(
     base_size = 18,
-    base_family = "Source Sans Pro 3") +
+    base_family = "Source Sans Pro") +
   theme(
     legend.title = element_blank(),
     legend.text = element_text(size = 10),

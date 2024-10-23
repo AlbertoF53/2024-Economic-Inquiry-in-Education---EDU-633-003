@@ -87,7 +87,7 @@ editor_options:
 
 ## Social Cognitive Theory (SCT) {background-image="background.jpg"}
 
-SCT postulates that contextual influences can affect a person's belief on her ability to engage in behaviors that lead to specific outcomes. Bandura postulates there are four contextual influences:
+SCT postulates that contextual influences can affect a person's belief on her ability to engage in behaviors that lead to specific outcomes. Bandura (1994) postulates there are four contextual influences:
 
 1.  Vicarious experiences (e.g., seeing other succeeding in the task)
 
@@ -153,9 +153,9 @@ Students were entered into a raffle for an Apple iPad as an incentive
 
 ## Main research questions {background-image="background.jpg"}
 
-What is the impact of transfer self-efficacy on goal orientation among community college students?
+1.  What is the impact of transfer self-efficacy on goal orientation among community college students?
 
-Does the impact vary by transfer self-efficacy component?
+2.  Does the impact vary by transfer self-efficacy component?
 
 ## Impact of self-efficacy on goal orient. {background-image="background.jpg"}
 
@@ -165,7 +165,7 @@ Does the impact vary by transfer self-efficacy component?
 
 -   Goal orientation towards transfer rests on having an academic plan, being proactive in securing academic skills, having decided on the major to pursue, and seen oneself attending college.
 
--   Goal orientation is impacted by empowering experiences at the community college (e.g., having friends who transferred), being exposed to personnel who validate one's ability to transfer, as well as by clear institutional agreements facilitating an understanding of transfer policies, and how to meet them.
+-   Goal orientation is influenced by empowering experiences at community colleges. These experiences include having friends who have successfully transferred, engaging with supportive college personnel who affirm students' potential to transfer, and understanding institutional transfer agreements that outline clear policies and the necessary steps to achieve them.
 
 # [Questions?]{style="color:white;"} {background-image="ocean.jpeg"}
 
