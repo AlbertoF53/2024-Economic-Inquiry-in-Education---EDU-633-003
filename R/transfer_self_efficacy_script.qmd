@@ -1,7 +1,7 @@
 ---
 title: "transfer_self_efficacy"
 author: "Alberto F Cabrera"
-date: 11-11-2024
+date: 10-23-2024
 format:
   html:
     code-link: true
@@ -49,6 +49,8 @@ This table was retrieved on October 10, 2024. The table was prepared on December
 
 ### Retrieving and preparing database
 
+Retrieving the excel file table302_2 HS enrollment in percentages. Renaming the variables and creating a pivot_longer excel file.
+
 ```{r hs_graduates_pse}
 #| echo: true
 #| warning: false
@@ -64,6 +66,13 @@ table302_1_hs_enrollment <-  table302_1_hs_enrollment |>
   rename('Four year' = per_4yr)
   
 
+table302_1_hs_enrollment <- table302_1_hs_enrollment |> 
+  pivot_longer(cols = 2:4, 
+               names_to = "institution",
+               values_to = "percent") |> 
+  mutate(year = as.numeric(year))
+
+
 ```
 
 Plotting percentage of high school graduates enrolling in postsecondary education.
@@ -72,30 +81,26 @@ Plotting percentage of high school graduates enrolling in postsecondary educatio
 #|echo: true
 #|warning: false
 
-#Setting up colors & assigning them
+#Setting up colors & assigning a unique color value to type of PSE
 
-thematic::okabe_ito(3)
+#thematic::okabe_ito(3)
 
-colors_ito <- c('#E69F00', '#009E73', "#0072B2")
+colors_ito <- c('grey9', '#009E73', "#0072B2")
 
-names(colors_ito) <- c('All', 'Four year', 'Two year')
+names(colors_ito) <- unique(table302_1_hs_enrollment$institution)
 
 title <- glue::glue(
   'Percentage of HS graduates enrolling in ',
-  '<span style="color:{colors_ito["Four year"]};">**4-year**</span> ',
+  '<span style="color:{colors_ito["Four year"]};">4-year</span> ',
   'and ',
-  '<span style="color:{colors_ito["Two year"]};">**2-year**</span> ',
+  '<span style="color:{colors_ito["Two year"]};">2-year</span> ',
   'colleges')
 
 subtitle <-  "(1973 - 2022)"
 caption <- "Based on table 302.10 Digest of Education Statistics"
 
 
-table302_1_hs_enrollment |> 
-  pivot_longer(cols = 2:4, 
-               names_to = "institution",
-               values_to = "percent") |> 
-  mutate(year = as.numeric(year)) |> 
+plot <- table302_1_hs_enrollment |> 
   ggplot(aes(x = year, y = percent, color = institution)) +
   geom_point() +
   geom_line() +
@@ -116,20 +121,20 @@ table302_1_hs_enrollment |>
   geom_text(x = 1990,
             y = 65,
             label = "Overall",
-            color = "red",
+            color = "grey9",
             size = 3.5) +
   theme_minimal(
     base_size = 12,
     base_family = "Source Sans Pro") +
+  scale_color_manual(values = colors_ito) +
   theme(
     legend.position = 'none',
-    scale_color_manual(values = colors_ito),
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
     axis.line = element_line(color = 'grey50'),
     plot.title = ggtext::element_markdown(
       family = 'Merriweather',
-      size = rel(1.2),
+      size = rel(1.4),
       margin = margin(b = 0.3, unit = 'cm')
     ),
     plot.subtitle = ggtext::element_markdown(
@@ -138,5 +143,11 @@ table302_1_hs_enrollment |>
       margin = margin(b = 0.3, unit = 'cm')
     ),
     plot.caption = element_text(size = rel(0.8)) )
+
+
+# Convert ggplot to interactive plot with plotly
+plotly::ggplotly(plot)
+
+
 
 ```

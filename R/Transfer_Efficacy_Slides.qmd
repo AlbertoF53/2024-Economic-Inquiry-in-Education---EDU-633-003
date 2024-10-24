@@ -65,9 +65,115 @@ editor_options:
 :::
 :::::
 
-## [COVID-19]{style="color:#E69F00;"} worsened enr. decline {background-image="background.jpg"}
+## Community colleges at a glance {background-image="background.jpg"}
 
-![](images/problem_picture-02.jpg)
+![](images/community_colleges_glance.jpg)
+
+# [*However, something has been lurking on the dark*]{style="color:#FF0000"} {background-image="weather-effects-composition.jpg"}
+
+## [COVID-19]{style="color:#E69F00"} worsened enr. decline {background-image="background.jpg"}
+
+```{r hs_graduates_pse}
+#| echo: false
+#| warning: false
+
+library(tidyverse)
+library(plotly)
+library(readxl)
+library(sysfonts)
+
+table302_1_hs_enrollment <- read_excel("~/Documents/2024 Economic Inquiry in Education - EDU-633-003/data/tabn302.1_hs_enrollment.xlsx") |> 
+  as_tibble()
+
+table302_1_hs_enrollment <-  table302_1_hs_enrollment |> 
+  rename(All = per_tot) |> 
+  rename('Two year' = per_2yr) |> 
+  rename('Four year' = per_4yr)
+  
+table302_1_hs_enrollment <- table302_1_hs_enrollment |> 
+  pivot_longer(cols = 2:4, 
+               names_to = "institution",
+               values_to = "percent") |> 
+  mutate(year = as.numeric(year),
+         percent = round(percent,digits = 1))
+
+#Setting up colors & assigning a unique color value to type of PSE
+
+#thematic::okabe_ito(3)
+
+colors_ito <- c('grey9', '#009E73', "#0072B2")
+
+names(colors_ito) <- unique(table302_1_hs_enrollment$institution)
+
+title <- glue::glue(
+  'Percentage of HS graduates enrolling in ',
+  '<span style="color:{colors_ito["Four year"]};">4-year</span> ',
+  'and ',
+  '<span style="color:{colors_ito["Two year"]};">2-year</span> ',
+  'colleges')
+
+subtitle <-  "(1973 - 2022)"
+caption <- "Based on table 302.10 Digest of Education Statistics"
+
+plot <- table302_1_hs_enrollment |> 
+  ggplot(aes(x = year, y = percent, color = institution)) +
+  geom_point() +
+  geom_line() +
+  geom_vline(xintercept = 2020, linetype = "dashed",
+             color = '#E69F00', linewidth = 0.5)  +
+  scale_x_continuous(breaks = seq(1973, 2023, 5)) +
+  labs(title = title,
+       subtitle = subtitle,
+       caption = caption,
+       x = element_blank(),
+       y = element_blank(),
+       color = " ") +
+  geom_text(x = 2017,
+            y = 55,
+            label = "COVID-19",
+            color = '#E69F00',
+            size = 4.5) +
+  geom_text(x = 1990,
+            y = 65,
+            label = "Overall",
+            color = "grey9",
+            size = 5) +
+  theme_minimal(
+    base_size = 12,
+    base_family = "Source Sans Pro") +
+  scale_color_manual(values = colors_ito) +
+  theme(
+    legend.position = 'none',
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line = element_line(color = 'grey50'),
+    plot.title = ggtext::element_markdown(
+      family = 'Merriweather',
+      size = rel(1.2),
+      margin = margin(b = 0.4, unit = 'cm')
+    ),
+    plot.subtitle = ggtext::element_markdown(
+      family = 'Merriweather',
+      size = rel(1.1),
+      margin = margin(b = 0.3, unit = 'cm')
+    ),
+    plot.caption = element_text(size = rel(0.8)) )
+
+# Convert ggplot to interactive plot with plotly
+plotly::ggplotly(plot)
+
+
+```
+
+## Enrollment decline summary {background-image="background.jpg"}
+
+-   From 2018 to 2021, the proportion of HS graduates who enrolled in higher education decreased by 7%, or 225,000.
+
+-   The percentage of HS graduates enrolling in community colleges declined at higher pace next to national trend (8.6%).
+
+-   The proportion of community college graduates who transferred decreased by about 8% between 2021 and 2022.
+
+-   In Spring 2024, National Student Clearinghouse reported recovery of transfer rates. The overall transfer rate in fall 2023 grew 5.3% next to fall 2022.
 
 ## Research questions {background-image="background.jpg"}
 
@@ -165,9 +271,10 @@ Students were entered into a raffle for an Apple iPad as an incentive
 
 -   Goal orientation towards transfer rests on having an academic plan, being proactive in securing academic skills, having decided on the major to pursue, and seen oneself attending college.
 
--   Goal orientation is influenced by empowering experiences at community colleges. These experiences include having friends who have successfully transferred, engaging with supportive college personnel who affirm students' potential to transfer, and understanding institutional transfer agreements that outline clear policies and the necessary steps to achieve them.
+-   Goal orientation is influenced by empowering experiences at community colleges. Those experiences include having friends who have successfully transferred, engaging with supportive college personnel who affirm students' potential to transfer, and understanding institutional transfer agreements that outline clear policies and the necessary steps to achieve them.
 
-# [Questions?]{style="color:white;"} {background-image="ocean.jpeg"}
+# [Questions?]{style="color:white;"}{background-image="annapolis.jpeg"}
+
 
 ## In class exercise: What intervention strategies do you suggest? {background-image="background.jpg"}
 
@@ -205,7 +312,7 @@ The U.S. Department of Education published a list of community colleges and univ
 
 Bandura, A (1988). Organizational Application of Social Cognitive Theory. Australian Journal of Management, 13(2): pp. 275 - 302. 
 
-Bandura, A. (1994). Self-efficacy. In VS Ramachandran. Encyclopedia of Human Behavior, 4, 71-81.
+Bandura, A. (1994). Self-efficacy. In V.S. Ramachandran. Encyclopedia of Human Behavior, 4, 71-81.
 
 Buenaflor, S. H. & Cabrera, A. F. (2023). Transfer efficacy and goal orientation among potential transfer students: An exploratory study.  Paper presented before the annual meeting of the National Institute for the Study of Transfer Students (NISTS). Portland, Oregon.
 
