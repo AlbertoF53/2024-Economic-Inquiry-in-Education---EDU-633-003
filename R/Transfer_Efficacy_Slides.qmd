@@ -4,7 +4,7 @@ subtitle: "Economic Inquiry in Education (EDU-633-001)"
 author: 
   name: "Dr. Alberto F. Cabrera"
   affiliation: "American University & University of Maryland"
-  email: cabrera@umd.edu
+  email: cabrera@umd.ed
 date: 2024-11-11
 format:
   revealjs:
@@ -72,7 +72,6 @@ editor_options:
 # [However, something has been lurking on the dark]{style="color:red;"} {background-image="lurking_dark.jpeg"}
 
 [^1]
-
 
 [^1]: [Figure source: Freepick]{style="color:white;"}
 
@@ -325,7 +324,7 @@ Students were entered into a raffle for an Apple iPad as an incentive
 
 -   Goal orientation is influenced by empowering experiences at community colleges. Those experiences include having friends who have successfully transferred, engaging with supportive college personnel who affirm students' potential to transfer, and understanding institutional transfer agreements that outline clear policies and the necessary steps to achieve them.
 
-# [Questions?]{style="color:black;"} {background-image="abstract.jpg"}
+# [Questions?]{style="color:black;"} {background-image="rm222batch5-kul-18.jpg"}
 
 ## In class exercise: What intervention strategies do you suggest? {background-image="background.jpg"}
 
