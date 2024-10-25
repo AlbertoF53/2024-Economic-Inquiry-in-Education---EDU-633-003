@@ -148,7 +148,7 @@ plot <- table302_1_hs_enrollment |>
 
 
 # Convert ggplot to interactive plot with plotly
-plotly::ggplotly(plot)
+plotly::ggplotly(plot, width = 800, height = 600)
 
 
 ```
