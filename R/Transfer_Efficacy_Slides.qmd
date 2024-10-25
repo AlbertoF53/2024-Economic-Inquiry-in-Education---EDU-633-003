@@ -1,5 +1,5 @@
 ---
-title: "Transfer Efficacy & Goal Orientation"
+title: "Transfer Self-Efficacy & Goal Orientation"
 subtitle: "Economic Inquiry in Education (EDU-633-001)"
 author: 
   name: "Dr. Alberto F. Cabrera"
@@ -69,9 +69,14 @@ editor_options:
 
 ![](images/community_colleges_glance.jpg)
 
-# [*However, something has been lurking on the dark*]{style="color:#FF0000"} {background-image="background.jpg"}
+# [However, something has been lurking on the dark]{style="color:red;"} {background-image="lurking_dark.jpeg"}
 
-## [COVID-19]{style="color:#E69F00"} worsened enr. decline 
+[^1]
+
+
+[^1]: [Figure source: Freepick]{style="color:white;"}
+
+## [COVID-19]{style="color:#E69F00"} worsened enrol. decline
 
 ```{r hs_graduates_pse}
 #| echo: false
@@ -90,12 +95,21 @@ table302_1_hs_enrollment <-  table302_1_hs_enrollment |>
   rename('Two year' = per_2yr) |> 
   rename('Four year' = per_4yr)
   
+# table302_1_hs_enrollment <- table302_1_hs_enrollment |> 
+#   pivot_longer(cols = 2:4, 
+#                names_to = "institution",
+#                values_to = "percent") |> 
+#   mutate(year = as.numeric(year),
+#          percent = round(percent,digits = 1))
+
 table302_1_hs_enrollment <- table302_1_hs_enrollment |> 
   pivot_longer(cols = 2:4, 
                names_to = "institution",
                values_to = "percent") |> 
   mutate(year = as.numeric(year),
-         percent = round(percent,digits = 1))
+         percent = round(percent,digits = 1)) |> 
+  filter(year >= 2000)
+
 
 #Setting up colors & assigning a unique color value to type of PSE
 
@@ -112,8 +126,52 @@ title <- glue::glue(
   '<span style="color:{colors_ito["Two year"]};">2-year</span> ',
   'colleges')
 
-subtitle <-  "(1973 - 2022)"
-caption <- "Based on table 302.10 Digest of Education Statistics"
+# subtitle <-  "(2000 - 2022)"
+# caption <- "Based on table 302.10 Digest of Education Statistics"
+
+# plot <- table302_1_hs_enrollment |> 
+#   ggplot(aes(x = year, y = percent, color = institution)) +
+#   geom_point() +
+#   geom_line() +
+#   geom_vline(xintercept = 2020, linetype = "dashed",
+#              color = '#E69F00', linewidth = 0.5)  +
+#   scale_x_continuous(breaks = seq(1973, 2023, 5)) +
+#   labs(title = title,
+#        subtitle = subtitle,
+#        caption = caption,
+#        x = element_blank(),
+#        y = element_blank(),
+#        color = " ") +
+#   geom_text(x = 2017,
+#             y = 55,
+#             label = "COVID-19",
+#             color = '#E69F00',
+#             size = 4) +
+#   geom_text(x = 1990,
+#             y = 65,
+#             label = "Overall",
+#             color = "grey9",
+#             size = 4) +
+#   theme_minimal(
+#     base_size = 12,
+#     base_family = "Source Sans Pro") +
+#   scale_color_manual(values = colors_ito) +
+#   theme(
+#     legend.position = 'none',
+#     panel.grid.major = element_blank(),
+#     panel.grid.minor = element_blank(),
+#     axis.line = element_line(color = 'grey50'),
+#     plot.title = ggtext::element_markdown(
+#       family = 'Merriweather',
+#       size = rel(1.2),
+#       margin = margin(b = 0.2, unit = 'cm')
+#     ),
+#     plot.subtitle = ggtext::element_markdown(
+#       family = 'Merriweather',
+#       size = rel(1.1),
+#       margin = margin(b = 0.3, unit = 'cm')
+#     ),
+#     plot.caption = element_text(size = rel(0.8)) )
 
 plot <- table302_1_hs_enrollment |> 
   ggplot(aes(x = year, y = percent, color = institution)) +
@@ -121,23 +179,23 @@ plot <- table302_1_hs_enrollment |>
   geom_line() +
   geom_vline(xintercept = 2020, linetype = "dashed",
              color = '#E69F00', linewidth = 0.5)  +
-  scale_x_continuous(breaks = seq(1973, 2023, 5)) +
+  scale_x_continuous(breaks = seq(2000, 2023, 3)) +
   labs(title = title,
-       subtitle = subtitle,
-       caption = caption,
+       subtitle = element_blank(),
+       caption = element_blank(),
        x = element_blank(),
        y = element_blank(),
        color = " ") +
-  geom_text(x = 2017,
+  geom_text(x = 2018.7,
             y = 55,
             label = "COVID-19",
             color = '#E69F00',
-            size = 4) +
-  geom_text(x = 1990,
-            y = 65,
+            size = 3.1) +
+  geom_text(x = 2011,
+            y = 71,
             label = "Overall",
             color = "grey9",
-            size = 4) +
+            size = 3.5) +
   theme_minimal(
     base_size = 12,
     base_family = "Source Sans Pro") +
@@ -151,13 +209,7 @@ plot <- table302_1_hs_enrollment |>
       family = 'Merriweather',
       size = rel(1.2),
       margin = margin(b = 0.2, unit = 'cm')
-    ),
-    plot.subtitle = ggtext::element_markdown(
-      family = 'Merriweather',
-      size = rel(1.1),
-      margin = margin(b = 0.3, unit = 'cm')
-    ),
-    plot.caption = element_text(size = rel(0.8)) )
+    ))
 
 # Convert ggplot to interactive plot with plotly
 plotly::ggplotly(plot)
@@ -273,8 +325,7 @@ Students were entered into a raffle for an Apple iPad as an incentive
 
 -   Goal orientation is influenced by empowering experiences at community colleges. Those experiences include having friends who have successfully transferred, engaging with supportive college personnel who affirm students' potential to transfer, and understanding institutional transfer agreements that outline clear policies and the necessary steps to achieve them.
 
-# [Questions?]{style="color:white;"}{background-image="annapolis.jpeg"}
-
+# [Questions?]{style="color:black;"} {background-image="abstract.jpg"}
 
 ## In class exercise: What intervention strategies do you suggest? {background-image="background.jpg"}
 
