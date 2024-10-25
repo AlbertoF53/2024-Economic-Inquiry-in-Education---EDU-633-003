@@ -71,7 +71,7 @@ editor_options:
 
 # [*However, something has been lurking on the dark*]{style="color:#FF0000"} {background-image="background.jpg"}
 
-## [COVID-19]{style="color:#E69F00"} worsened enr. decline {background-image="background.jpg"}
+## [COVID-19]{style="color:#E69F00"} worsened enr. decline 
 
 ```{r hs_graduates_pse}
 #| echo: false
