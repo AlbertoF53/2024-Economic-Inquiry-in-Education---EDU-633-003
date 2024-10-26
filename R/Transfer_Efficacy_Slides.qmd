@@ -69,7 +69,7 @@ editor_options:
 
 ![](images/community_colleges_glance.jpg)
 
-# [However, something has been lurking on the dark]{style="color:red;"} {background-image="lurking_dark.jpeg"}
+# [However, something has been lurking in the darkness]{style="color:red;"} {background-image="lurking_dark.jpeg"}
 
 [^1]
 
