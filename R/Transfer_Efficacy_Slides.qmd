@@ -391,7 +391,7 @@ The U.S. Department of Education published a list of community colleges and univ
 :::
 :::::
 
-# [*Many thanks!!!*]{style="color:yellow;"} {background-image="villarica.jpeg"}
+# [*Many thanks!!!*]{style="color:yellow;"} {background-image="anne_arundel_cc.jpg"}
 
 ## References {background-image="background.jpg"}
 
