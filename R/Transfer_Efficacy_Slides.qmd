@@ -253,13 +253,13 @@ girafe(ggobj = plot, width_svg = 5, height_svg = 3)
 
 ## Enrollment decline summary {background-image="background.jpg"}
 
--   From 2018 to 2021, the proportion of HS graduates who enrolled in higher education decreased by 7%, or 225,000.
+-   From 2018 to 2021, the proportion of HS graduates who enrolled in higher education decreased by 7%, or 480,258 ([table 302.10](https://nces.ed.gov/programs/digest/d23/tables/dt23_302.10.asp?current=yes) NCES,July 2023).
 
--   The percentage of HS graduates enrolling in community colleges declined at higher pace next to national trend (8.6%).
+-   The percentage of HS graduates enrolling in community colleges declined at higher pace next to the national trend (9%) from 2018 to 2022.
 
--   The proportion of community college graduates who transferred decreased by about 8% between 2021 and 2022.
+-   The proportion of community college graduates who transferred decreased by about 8% between 2021 and 2022 (National Student Clearinghouse (NSC), [March 9, 2023](https://www.studentclearinghouse.org/nscblog/community-college-students-transferring-to-four-year-colleges-decline-nearly-8-from-fall-2021-to-fall-2022/#:~:text=Transfer%20enrollment%20from%20two%2Dyear,National%20Student%20Clearinghouse%20Research%20Center.)).
 
--   In Spring 2024, National Student Clearinghouse reported recovery of transfer rates. The overall transfer rate in fall 2023 grew 5.3% next to fall 2022.
+-   In Spring 2024, [NSC](https://nscresearchcenter.org/transfer-and-progress/#:~:text=The%20number%20of%20students%20who,from%2012.5%20percent%20last%20year.) reported recovery of transfer rates. The overall transfer rate in fall 2023 grew 5.3% next to fall 2022.
 
 ## Research questions {background-image="background.jpg"}
 
