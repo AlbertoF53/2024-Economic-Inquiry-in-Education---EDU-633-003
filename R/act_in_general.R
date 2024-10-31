@@ -53,8 +53,8 @@ subtitle_disp <- "different populations: 2001 - 2022"
 caption <- "Source: Average ACT Score for 2022, 2021, 2020, 2019, 2018, and Earlier Years"
 
 
-act_inter <- act_disparities %>% 
-  na.omit() %>% 
+act_inter <- act_disparities |> 
+  na.omit() |> 
   filter(ethnicity %in% c('Native American','African American', 'Asian American',
                           'European', 'Latinx', 'Multiple')) %>%
   mutate(

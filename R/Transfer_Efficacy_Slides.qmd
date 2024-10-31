@@ -87,7 +87,12 @@ library(readxl)
 library(sysfonts)
 library(ggiraph)
 
-table302_1_hs_enrollment <- read_excel("~/Documents/2024 Economic Inquiry in Education - EDU-633-003/data/tabn302.1_hs_enrollment.xlsx") |> 
+
+# table302_1_hs_enrollment <- read_excel("data_raw/tabn302.1_hs_enrollment.xlsx") |> 
+#   as_tibble()
+
+
+table302_1_hs_enrollment <- read_excel("~/Documents/2024 Economic Inquiry in Education - EDU-633-003/data_raw/tabn302.1_hs_enrollment.xlsx") |> 
   as_tibble()
 
 table302_1_hs_enrollment <-  table302_1_hs_enrollment |> 
