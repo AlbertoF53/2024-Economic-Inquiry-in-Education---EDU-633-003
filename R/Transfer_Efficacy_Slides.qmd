@@ -86,6 +86,7 @@ library(plotly)
 library(readxl)
 library(sysfonts)
 library(ggiraph)
+library(htmltools)
 
 
 # table302_1_hs_enrollment <- read_excel("data_raw/tabn302.1_hs_enrollment.xlsx") |> 
@@ -130,13 +131,13 @@ caption <- "Based on table 302.10 *Digest of Education Statistics*"
 # Create the ggplot with ggiraph interactive elements
 
 plot <- table302_1_hs_enrollment |> 
-  mutate(tooltip_label = glue::glue("Year: {year}<br>Enrollment: {percent}%")) |> 
+  mutate(tooltip_label = glue::glue("Institution: {institution}<br>Year: {year}<br>Enrollment: {percent}%")) |> 
   ggplot(aes(x = year, y = percent, color = institution,
              linetype = institution)) +
   geom_point_interactive(
-    aes(tooltip = tooltip_label), size = 3.5) +
+    aes(tooltip = tooltip_label, data_id = institution), size = 3.5) +
   geom_line_interactive(
-    aes(tooltip = paste0("Institution: ", institution)), size = 1) +
+    aes(data_id = institution), size = 1) +
   geom_vline(xintercept = 2020, linetype = "dashed", color = "#E69F00", linewidth = 0.5) +
   scale_x_continuous(breaks = seq(2000, 2023, 2)) +
   labs(
@@ -165,26 +166,89 @@ plot <- table302_1_hs_enrollment |>
 
 #Changing the border
 
-girafe(
-  ggobj = plot,
-  width_svg = 8,
-  height_svg = 5,
-  options = list(
-    opts_hover(css = ''),
-    opts_hover_inv(
-      css = girafe_css(
-        css = 'opacity:0.4;',
-        line = 'opacity:0.075;'
-      )
-    ),
-    opts_tooltip(
-      css = htmltools::css(
-        background = 'white',
-        border = '2px solid black;',
-        padding = '10px',
-        font_weight = 600,
-        font_size = '14p'))))
+girafe(ggobj = plot, 
+       width_svg = 8, 
+       height_svg = 5,
+       options = list(
+         opts_hover(css = ''),
+         opts_hover_inv(
+           css = girafe_css(
+             css = 'opacity:0.4;',
+             line = 'opacity:0.075;' )),
+         opts_hover_inv(css = 'opacity:0.2;'),
+         opts_tooltip(
+           css = htmltools::css(
+             background = 'white',
+             border = '2px solid black;',
+             padding = '10px',
+             font_weight = 600,
+             font_size = '14p'
+           )
+         )
+       ))
 
+
+
+
+
+# Create the ggplot with ggiraph interactive elements
+
+# plot <- table302_1_hs_enrollment |> 
+#   mutate(tooltip_label = glue::glue("Year: {year}<br>Enrollment: {percent}%")) |> 
+#   ggplot(aes(x = year, y = percent, color = institution,
+#              linetype = institution)) +
+#   geom_point_interactive(
+#     aes(tooltip = tooltip_label), size = 3.5) +
+#   geom_line_interactive(
+#     aes(tooltip = paste0("Institution: ", institution)), size = 1) +
+#   geom_vline(xintercept = 2020, linetype = "dashed", color = "#E69F00", linewidth = 0.5) +
+#   scale_x_continuous(breaks = seq(2000, 2023, 2)) +
+#   labs(
+#     title = title,
+#     subtitle = subtitle,
+#     caption = caption,
+#     x = NULL,
+#     y = NULL,
+#     color = " "
+#   ) +
+#   geom_text(x = 2018.3, y = 55, label = "COVID-19", color = "#E69F00", size = 3.5) +
+#   geom_text(x = 2012.5, y = 71, label = "Overall", color = "grey9", size = 3.5) +
+#   theme_minimal(base_size = 14, base_family = "Source Sans Pro") +
+#   scale_color_manual(values = colors_ito) +
+#   theme(
+#     legend.position = "none",
+#     panel.grid.major = element_blank(),
+#     panel.grid.minor = element_blank(),
+#     axis.line = element_line(color = "grey50"),
+#     plot.title = ggtext::element_markdown(
+#       family = "Merriweather", size = rel(1.1), margin = margin(b = 0.2, unit = "cm")),
+#     plot.subtitle = ggtext::element_markdown(
+#       family = "Merriweather", size = rel(.8), margin = margin(b = 0.2, unit = "cm")),
+#     plot.caption = ggtext::element_markdown(size = rel(0.5))
+#   )
+# 
+# #Changing the border
+# 
+# girafe(
+#   ggobj = plot,
+#   width_svg = 8,
+#   height_svg = 5,
+#   options = list(
+#     opts_hover(css = ''),
+#     opts_hover_inv(
+#       css = girafe_css(
+#         css = 'opacity:0.4;',
+#         line = 'opacity:0.075;'
+#       )
+#     ),
+#     opts_tooltip(
+#       css = htmltools::css(
+#         background = 'white',
+#         border = '2px solid black;',
+#         padding = '10px',
+#         font_weight = 600,
+#         font_size = '14p'))))
+# 
 
 ```
 

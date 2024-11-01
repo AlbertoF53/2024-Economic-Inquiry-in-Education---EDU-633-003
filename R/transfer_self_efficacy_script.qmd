@@ -38,6 +38,7 @@ library(gfonts)
 library(janitor)
 library(Hmisc)
 library(expss)
+library(ggiraph)
 
 ```
 
@@ -313,6 +314,95 @@ plot <- table302_1_hs_enrollment |>
 
 # Convert ggplot to ggiraph plot
 girafe(ggobj = plot, width_svg = 5, height_svg = 3)
+
+
+```
+
+Additional changes to the chart by making the lines interactive as well and lessening the colors of the other continents when highlighting one of them.
+
+```{r ggiraph_interactive_last_option}
+#| echo: false
+#| warning: false
+
+library(ggiraph)
+library(htmltools)
+
+#Setting up colors & assigning a unique color value to type of PSE
+
+#thematic::okabe_ito(3)
+
+colors_ito <- c('grey9', '#009E73', "#0072B2")
+
+names(colors_ito) <- unique(table302_1_hs_enrollment$institution)
+
+title <- glue::glue(
+  'Percentage of HS graduates enrolling in ',
+  '<span style="color:{colors_ito["Four year"]};">4-year</span> ',
+  'and ',
+  '<span style="color:{colors_ito["Two year"]};">2-year</span> ',
+  'colleges')
+
+subtitle <-  "(2000 - 2022)"
+caption <- "Based on table 302.10 Digest of Education Statistics"
+
+
+# Create the ggplot with ggiraph interactive elements
+
+plot <- table302_1_hs_enrollment |> 
+  ggplot(aes(x = year, y = percent, color = institution)) +
+  geom_point_interactive(
+    aes(tooltip = paste0("Institution: ",institution, "<br>Year: ", year, "<br>Enrollment: ", percent, "%"),
+        data_id = institution), size = 3) +
+  geom_line_interactive(
+    aes(#tooltip = paste0("Institution: ", institution),
+        data_id = institution), size = 1) +
+  geom_vline(xintercept = 2020, linetype = "dashed", color = "#E69F00", linewidth = 0.5) +
+  scale_x_continuous(breaks = seq(2000, 2023, 2)) +
+  labs(
+    title = title,
+    subtitle = subtitle,
+    caption = caption,
+    x = NULL,
+    y = NULL,
+    color = " "
+  ) +
+  geom_text(x = 2018.3, y = 55, label = "COVID-19", color = "#E69F00", size = 2.5) +
+  geom_text(x = 2012.5, y = 71, label = "Overall", color = "grey9", size = 2.5) +
+  theme_minimal(base_size = 10, base_family = "Source Sans Pro") +
+  scale_color_manual(values = colors_ito) +
+  theme(
+    legend.position = "none",
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line = element_line(color = "grey50"),
+    plot.title = ggtext::element_markdown(
+      family = "Merriweather", size = rel(1), margin = margin(b = 0.2, unit = "cm")),
+    plot.subtitle = ggtext::element_markdown(
+      family = "Merriweather", size = rel(.8), margin = margin(b = 0.2, unit = "cm")),
+    plot.caption = element_text(size = rel(0.8))
+  )
+
+# Convert ggplot to ggiraph plot
+girafe(ggobj = plot, 
+       width_svg = 5, 
+       height_svg = 3,
+       options = list(
+         opts_hover(css = ''),
+         opts_hover_inv(
+           css = girafe_css(
+             css = 'opacity:0.4;',
+             line = 'opacity:0.075;' )),
+         opts_hover_inv(css = 'opacity:0.2;'),
+         opts_tooltip(
+           css = htmltools::css(
+             background = 'white',
+             border = '2px solid black;',
+             padding = '10px',
+             font_weight = 600,
+             font_size = '14p'
+           )
+         )
+       ))
 
 
 ```
