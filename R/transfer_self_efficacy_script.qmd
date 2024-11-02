@@ -324,8 +324,7 @@ Additional changes to the chart by making the lines interactive as well and less
 #| echo: false
 #| warning: false
 
-library(ggiraph)
-library(htmltools)
+library(ggiraf)
 
 #Setting up colors & assigning a unique color value to type of PSE
 
@@ -403,6 +402,124 @@ girafe(ggobj = plot,
            )
          )
        ))
+
+
+```
+
+A new version with a longer legend
+
+```{r girafe_longer_legend}
+#| echo: false
+#| warning: false
+
+
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(gtsummary)
+library(gtools)
+library(gfonts)
+library(janitor)
+library(Hmisc)
+library(expss)
+library(ggiraph)
+
+table302_1_hs_enrollment <- read_excel("~/Documents/2024 Economic Inquiry in Education - EDU-633-003/data_raw/tabn302.1_hs_enrollment.xlsx") |> 
+  as_tibble()
+
+table302_1_hs_enrollment <-  table302_1_hs_enrollment |> 
+  rename('all' = per_tot) |> 
+  rename('2-year' = per_2yr) |> 
+  rename('4-year' = per_4yr)
+  
+
+table302_1_hs_enrollment <- table302_1_hs_enrollment |> 
+  pivot_longer(cols = 2:4, 
+               names_to = "institution",
+               values_to = "percent") |> 
+  mutate(year = as.numeric(year),
+         percent = round(percent,digits = 1)) |> 
+  filter(year >= 2000)
+
+
+#Setting up colors & assigning a unique color value to type of PSE
+
+#thematic::okabe_ito(3)
+
+colors_ito <- c('grey9', '#009E73', "#0072B2")
+
+names(colors_ito) <- unique(table302_1_hs_enrollment$institution)
+title <- glue::glue(
+  'Percentage of HS graduates enrolling in ',
+  '<span style="color:{colors_ito["4-year"]};">**4-year**</span> ',
+  'and ',
+  '<span style="color:{colors_ito["2-year"]};">**2-year**</span> ',
+  'colleges')
+
+subtitle <-  "(2000 - 2022)"
+caption <- "Based on table 302.10 *Digest of Education Statistics*"
+
+# Create the ggplot with ggiraph interactive elements
+
+plot <- table302_1_hs_enrollment |> 
+  mutate(tooltip_label = glue::glue("{percent}% of HS grads enrolled<br> in {institution} colleges in {year}")) |> 
+  ggplot(aes(x = year, y = percent, color = institution,
+             linetype = institution)) +
+  geom_point_interactive(
+    aes(tooltip = tooltip_label, data_id = institution), size = 3.5) +
+  geom_line_interactive(
+    aes(data_id = institution), size = 1) +
+  geom_vline(xintercept = 2020, linetype = "dashed", color = "#E69F00", linewidth = 0.5) +
+  scale_x_continuous(breaks = seq(2000, 2023, 2)) +
+  labs(
+    title = title,
+    subtitle = subtitle,
+    caption = caption,
+    x = NULL,
+    y = NULL,
+    color = " "
+  ) +
+  geom_text(x = 2018.3, y = 55, label = "COVID-19", color = "#E69F00", size = 3.5) +
+  geom_text(x = 2012.5, y = 71, label = "Overall", color = "grey9", size = 3.5) +
+  theme_minimal(base_size = 14, base_family = "Source Sans Pro") +
+  scale_color_manual(values = colors_ito) +
+  theme(
+    legend.position = "none",
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.line = element_line(color = "grey50"),
+    plot.title = ggtext::element_markdown(
+      family = "Merriweather", size = rel(1.1), margin = margin(b = 0.2, unit = "cm")),
+    plot.subtitle = ggtext::element_markdown(
+      family = "Merriweather", size = rel(.8), margin = margin(b = 0.2, unit = "cm")),
+    plot.caption = ggtext::element_markdown(size = rel(0.5))
+  )
+
+#Changing the border
+
+girafe(ggobj = plot, 
+       width_svg = 8, 
+       height_svg = 5,
+       options = list(
+         opts_hover(css = ''),
+         opts_hover_inv(
+           css = girafe_css(
+             css = 'opacity:0.4;',
+             line = 'opacity:0.075;' )),
+         opts_hover_inv(css = 'opacity:0.2;'),
+         opts_tooltip(
+           css = htmltools::css(
+             background = 'white',
+             border = '2px solid black;',
+             padding = '10px',
+             font_weight = 600,
+             font_size = '14p'
+           )
+         )
+       ))
+
+
+
 
 
 ```
