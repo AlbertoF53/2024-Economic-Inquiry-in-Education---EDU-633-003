@@ -143,8 +143,10 @@ plot <- table302_1_hs_enrollment |>
     y = element_blank(),
     color = " "
   ) +
-  geom_text(x = 2018.3, y = 55, label = "COVID-19", color = "#E69F00", size = 3.5) +
-  geom_text(x = 2012.5, y = 71, label = "Overall", color = "grey9", size = 3.5) +
+  geom_text(x = 2018.3, y = 55, label = "COVID-19", 
+            color = "#E69F00", size = 3.5) +
+  geom_text(x = 2012.5, y = 71, label = "All", color = "grey9", 
+            size = 4, fontface = 'bold') +
   theme_minimal(base_size = 14, base_family = "Source Sans Pro") +
   scale_color_manual(values = colors_ito) +
   theme(
