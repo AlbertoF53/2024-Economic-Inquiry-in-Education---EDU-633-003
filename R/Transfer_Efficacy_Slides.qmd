@@ -72,10 +72,6 @@ editor_options:
 
 # [*However, something has been lurking in the darkness*]{style="color:red;"} {background-image="lurking_dark.jpeg"}
 
-[^1]
-
-[^1]: [Figure source: Freepick]{style="color:white;"}
-
 ## [COVID-19]{style="color:#E69F00"} worsened enrol. decline
 
 ```{r hs_graduates_pse}
@@ -356,3 +352,15 @@ National Student Clearinghouse (March 9, 2023). Transfers from Community College
 Tourangeau, R., Rips, L. J. & Rainski (2000).The psychology of survey response, Cambridge University Press.
 
 Velasco, et al. (2024). Tracking transfer. College Research Center. Teachers College. Columbia University.
+
+## Acknowledgments {.appendix background-image="background.jpg"}
+
+Sources of background images:
+
+-   [Equitable Equations](https://github.com/equitable-equations/youtube/tree/main/Beautiful%20presentations)
+
+-   [iStock](https://www.istockphoto.com/)
+
+-   [FREEP!K](https://www.freepik.com/)
+
+-   [AACC](https://www.aacc.edu/)
