@@ -15,7 +15,7 @@ format:
     slide-number: true
     transition: slide
     title-slide-attributes: 
-      data-background-image: abstract.jpg
+      data-background-image: background.jpg
 execute: 
   echo: false
   warning: false
@@ -70,7 +70,7 @@ editor_options:
 
 ![](images/community_colleges_glance.jpg)
 
-# [*However, something has been lurking in the darkness*]{style="color:red;"} {background-image="lurking_dark.jpeg"}
+# [*However, something has been lurking in the darkness*]{style="color:white;"} {background-image="danger_darkness.jpeg"}
 
 ## [COVID-19]{style="color:#E69F00"} worsened enrol. decline
 
@@ -180,8 +180,6 @@ girafe(ggobj = plot,
            )
          )
        ))
-
-
 
 ```
 
@@ -293,7 +291,7 @@ Students were entered into a raffle for an Apple iPad as an incentive
 
 -   Goal orientation is influenced by empowering experiences at community colleges. Those experiences include having friends who have successfully transferred, engaging with supportive college personnel who affirm students' potential to transfer, and understanding institutional transfer agreements that outline clear policies and the necessary steps to achieve them.
 
-# [Questions?]{style="color:black;"} {background-image="rm222batch5-kul-18.jpg"}
+# [Questions?]{style="color:white;"} {background-image="annapolis.jpeg"}
 
 ## In class exercise: What intervention strategies do you suggest? {background-image="background.jpg"}
 
@@ -359,8 +357,6 @@ Sources of background images:
 
 -   [Equitable Equations](https://github.com/equitable-equations/youtube/tree/main/Beautiful%20presentations)
 
--   [iStock](https://www.istockphoto.com/)
+-   Personal photos
 
--   [FREEP!K](https://www.freepik.com/)
-
--   [AACC](https://www.aacc.edu/)
+-   [Anne Arundel Community College](https://www.aacc.edu/)
